@@ -1,0 +1,529 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2C3E50; /* Slate gray background for a modern 3D look */
+    color: #D5D8DC; /* Light gray text for general readability */
+    overflow-x: hidden;
+    perspective: 1000px; /* Global perspective for 3D effects */
+}
+
+/* Header Navigation with 3D Effect */
+header nav {
+    background: linear-gradient(90deg, #1E272E, #9B59B6); /* Gradient from onyx to amethyst purple */
+    position: relative;
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+header nav a {
+    position: relative;
+    color: #FFFFFF; /* White for nav text including "AJR Fashion" */
+    font-weight: bold; /* Bold text */
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+header nav a:hover {
+    color: #2ECC71; /* Emerald green on hover */
+    transform: translateZ(20px); /* 3D pop-out effect */
+}
+
+/* 3D Underline Hover Effect */
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #2ECC71; /* Emerald green underline */
+    transition: width 0.3s ease;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section with Background Image */
+.hero-section {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    animation: fadeIn3D 2s ease-out;
+}
+
+/* Style the Background Image */
+.hero-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire section */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateZ(-50px) scale(1.2); /* Background layer pushed back */
+    transition: transform 0.5s ease;
+    z-index: 0; /* Ensure the image is behind the content */
+}
+
+.hero-section:hover img {
+    transform: translateZ(-30px) scale(1.3); /* Slight zoom on hover */
+}
+
+/* Overlay Gradient for Depth */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(30, 39, 46, 0.7) 100%); /* Onyx overlay */
+    z-index: 1;
+}
+
+/* Animated Glow Effect */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(46, 204, 113, 0.3), transparent 70%); /* Emerald green glow */
+    transform: translate(-50%, -50%);
+    animation: glowPulse 5s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes glowPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+}
+
+.hero-section .content {
+    position: relative;
+    transform: translateZ(50px); /* Foreground layer pops out */
+    animation: slideUp3D 1s ease-out 0.3s both;
+    z-index: 2; /* Above the overlay and glow */
+}
+
+.hero-section h1 {
+    color: #FFFFFF; /* White color for "Welcome to AJR Fashion" */
+}
+
+/* Enhanced "Shop Now" Button */
+.hero-section .btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding: 1.5rem 3rem; /* Larger padding for bigger size */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold;
+    background: linear-gradient(45deg, #2ECC71, #9B59B6); /* Gradient from emerald green to amethyst purple */
+    color: #FFFFFF; /* White text */
+    border-radius: 50px; /* Rounded corners for a modern look */
+    border: 2px solid transparent; /* For glowing border effect */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, scale 0.3s ease;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+}
+
+.hero-section .btn:hover {
+    background: linear-gradient(45deg, #9B59B6, #2ECC71); /* Reverse gradient on hover */
+    transform: translateZ(30px) scale(1.05); /* Enhanced 3D pop-out and slight scale */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(46, 204, 113, 0.5); /* Glow effect with emerald green */
+    border-color: #2ECC71; /* Glowing emerald green border on hover */
+}
+
+.hero-section .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.hero-section .btn:hover::before {
+    left: 100%;
+}
+
+@keyframes fadeIn3D {
+    from {
+        opacity: 0;
+        transform: translateZ(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+
+@keyframes slideUp3D {
+    from {
+        transform: translateY(50px) translateZ(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) translateZ(50px);
+        opacity: 1;
+    }
+}
+
+/* Product Card with 3D Tilt Effect */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    background-color: #FDFDFD; /* Ivory background for cards */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    flex: 1 1 calc(33.333% - 1rem); /* Three cards per row with gap adjustment */
+    max-width: calc(33.333% - 1rem); /* Ensure cards don't exceed one-third of the container */
+    margin: 0.5rem; /* Adjusted margin for consistent spacing */
+}
+
+/* Ensure the container accounts for margins */
+.product-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+    gap: 0; /* Remove gap since we're using margins */
+}
+
+/* Adjust internal elements for larger cards */
+.product-card img {
+    width: 100%;
+    height: 300px; /* Increased height for larger cards */
+    object-fit: contain;
+    object-position: center;
+    transform: translateZ(20px); /* Image pops out slightly */
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: translateZ(40px) scale(1.1); /* Enhanced 3D zoom on hover */
+}
+
+/* Product Card Text */
+.product-card h3 {
+    color: #34495E; /* Dark charcoal gray for product name */
+    font-size: 1.5rem; /* Larger font size for larger cards */
+    margin: 0.5rem 0;
+}
+
+.product-card p {
+    color: #34495E; /* Dark charcoal gray for price */
+    font-size: 1.25rem; /* Larger font size for price */
+    margin-bottom: 1rem;
+}
+
+/* Product Card Button */
+.product-card .btn {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(45deg, #2ECC71, #9B59B6); /* Gradient from emerald green to amethyst purple */
+    color: #FFFFFF; /* White text for contrast */
+    transition: transform 0.3s ease, background 0.3s ease;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    padding: 0.75rem 1.5rem; /* Larger padding for larger button */
+    font-size: 1.1rem; /* Larger font size for button */
+}
+
+.product-card .btn:hover {
+    background: linear-gradient(45deg, #9B59B6, #2ECC71); /* Reverse gradient on hover */
+    transform: translateZ(20px); /* 3D pop-out effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.product-card .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.product-card .btn:hover::before {
+    left: 100%;
+}
+
+/* Cart Icon with 3D Bounce */
+header nav .fa-shopping-cart {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+header nav .fa-shopping-cart:hover {
+    transform: translateZ(20px) scale(1.2) rotate(10deg);
+}
+
+/* Featured Products Heading */
+.product-grid h2 {
+    color: #34495E; /* Dark charcoal gray for "Featured Products" */
+}
+
+.product-card {
+    animation: cardLoad3D 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardLoad3D {
+    from {
+        opacity: 0;
+        transform: perspective(1000px) translateZ(-100px) rotateX(10deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1000px) translateZ(0) rotateX(0deg);
+    }
+}
+
+/* Checkout Form with 3D Input Animation */
+.checkout input, .checkout textarea, .checkout select {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border-color: #9B59B6; /* Amethyst purple borders */
+    transform: translateZ(0);
+    color: #34495E; /* Dark charcoal gray for input text */
+}
+
+.checkout input:focus, .checkout textarea:focus, .checkout select:focus {
+    border-color: #2ECC71; /* Emerald green on focus */
+    box-shadow: 0 0 8px rgba(46, 204, 113, 0.3); /* Emerald green shadow */
+    transform: translateZ(10px); /* Slight 3D lift on focus */
+    outline: none;
+}
+
+/* Page Transition with 3D Effect */
+main {
+    animation: pageFade3D 0.6s ease-out;
+}
+
+/* General Headings */
+main h2 {
+    color: #34495E; /* Dark charcoal gray for headings like "Your Cart" */
+}
+
+@keyframes pageFade3D {
+    from {
+        opacity: 0;
+        transform: perspective(1000px) translateZ(-50px) rotateY(10deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(1000px) translateZ(0) rotateY(0deg);
+    }
+}
+
+/* Footer with 3D Gradient */
+footer {
+    background: linear-gradient(90deg, #1E272E, #9B59B6); /* Gradient from onyx to amethyst purple */
+    transform-style: preserve-3d;
+}
+
+footer a {
+    color: #D5D8DC; /* Light gray for footer icons */
+    transition: transform 0.3s ease, color 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+footer a:hover {
+    transform: translateZ(20px) scale(1.3);
+    color: #2ECC71; /* Emerald green on hover */
+}
+
+/* Loading Spinner with 3D Effect */
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #2ECC71; /* Emerald green spinner */
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin3D 0.8s linear infinite;
+    transform-style: preserve-3d;
+    margin-left: 8px;
+}
+
+@keyframes spin3D {
+    0% {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+    100% {
+        transform: perspective(1000px) rotateY(360deg) rotateX(360deg);
+    }
+}
+
+/* Admin Panel Styles with 3D Effects */
+.admin-nav a {
+    transition: color 0.3s ease, transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.admin-nav a:hover {
+    color: #2ECC71; /* Emerald green on hover */
+    transform: translateZ(20px);
+}
+
+.admin-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #2ECC71; /* Emerald green underline */
+    transition: width 0.3s ease;
+}
+
+.admin-nav a:hover::after {
+    width: 100%;
+}
+
+/* Table Row with 3D Hover */
+table tr {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+table tr:hover {
+    background-color: #ECECEC; /* Slightly darker ivory for hover */
+    transform: translateZ(10px);
+}
+
+/* Table Text */
+table th,
+table td {
+    color: #34495E; /* Dark charcoal gray for table text */
+}
+
+/* Form Button with 3D Animation */
+form button {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+form button:hover {
+    transform: translateZ(20px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Additional Styles for Consistency */
+.bg-white {
+    background-color: #FDFDFD !important; /* Ivory for cards and tables */
+}
+
+.text-gray-600 {
+    color: #D5D8DC !important; /* Light gray for secondary text */
+}
+
+.text-gray-700 {
+    color: #D5D8DC !important; /* Light gray for primary text */
+}
+
+.bg-gray-200 {
+    background-color: #ECECEC !important; /* Slightly darker ivory for table headers */
+}
+
+.text-pink-600 {
+    color: #2ECC71 !important; /* Emerald green for accents */
+}
+
+.text-red-600 {
+    color: #E74C3C !important; /* Vibrant red for errors and "Remove" links */
+}
+
+.text-blue-600 {
+    color: #9B59B6 !important; /* Amethyst purple for links */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .product-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .product-card {
+        flex: 1 1 calc(50% - 1rem); /* Two cards per row on smaller screens */
+        max-width: calc(50% - 1rem);
+    }
+
+    .hero-section .content {
+        padding: 2rem;
+    }
+
+    header nav .fa-shopping-cart:hover {
+        transform: translateZ(10px) scale(1.1);
+    }
+
+    .product-card img {
+        height: 200px; /* Slightly smaller height for mobile */
+    }
+
+    .product-card h3 {
+        font-size: 1.25rem; /* Adjust font size for mobile */
+    }
+
+    .product-card p {
+        font-size: 1rem; /* Adjust font size for mobile */
+    }
+
+    .product-card .btn {
+        padding: 0.5rem 1rem; /* Smaller button for mobile */
+        font-size: 0.9rem;
+    }
+
+    .hero-section .btn {
+        padding: 1rem 2rem; /* Slightly smaller padding for mobile */
+        font-size: 1.25rem; /* Slightly smaller font size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        flex: 1 1 100%; /* One card per row on very small screens */
+        max-width: 100%;
+    }
+}
